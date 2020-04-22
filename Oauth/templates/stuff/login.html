@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="limiter">
+    <div class="container-login100 page-background">
+        <div class="wrap-login100">
+            <form action="{% url 'stuff_login' %}" method="POST">
+                {% csrf_token %}
+                <span class="login100-form-logo">
+                    <img alt="" src="{% static 'img/logo-2.png' %}">
+                </span>
+                <span class="login100-form-title p-b-34 p-t-27">
+                    Log in
+                </span>
+                <div class="wrap-input100 validate-input" data-validate="Enter username">
+                    {{ form.username }}
+                    <i class="material-icons focus-input100 text-warning">person_pin</i>
+                </div>
+                <div class="wrap-input100 validate-input" data-validate="Enter password">
+                    {{ form.password }}
+                    <i class="material-icons focus-input100 text-warning">fingerprint</i>
+                </div>
+                <div class="contact100-form-checkbox">
+                    <input class="input-checkbox100" id="ckb1" type="checkbox" name="remember-me">
+                    <label class="label-checkbox100" for="ckb1">
+                        Remember me
+                    </label>
+                </div>
+                <div class="container-login100-form-btn">
+                    <button type="submit" class="login100-form-btn">
+                        Login
+                    </button>
+                </div>
+                <div class="text-center p-t-30">
+                    <a class="txt1" href="{% url 'stuff_register' %}">
+                        Don't Have An Account Register?
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}

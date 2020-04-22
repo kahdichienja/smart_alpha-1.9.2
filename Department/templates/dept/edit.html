@@ -1,0 +1,114 @@
+{% extends "util/base.html" %}
+{% load static %}
+
+{% block content %}
+<div class="page-wrapper">
+    <!-- start header -->
+    {% include 'util/navbar.html' %}
+    <!-- end header -->
+    <!-- start color quick setting -->
+    {% include 'util/startcolorquicksetting.html' %}
+    <!-- end color quick setting -->
+    <!-- start page container -->
+    <div class="page-container">
+        <!-- start sidebar menu -->
+        {% include 'util/sidebarmenu.html' %}
+        <!-- end sidebar menu -->
+        <!-- start page content -->
+        <div class="page-content-wrapper">
+            <div class="page-content">
+                <div class="page-bar">
+                    <div class="page-title-breadcrumb">
+                        <div class=" pull-left">
+                            <div class="page-title">Add Department</div>
+                        </div>
+                        <ol class="breadcrumb page-breadcrumb pull-right">
+                            <li><i class="material-icons">home</i>&nbsp;<a class="parent-item"
+                                    href="{% url 'dashboard' %}">Home</a>&nbsp;<i class="material-icons">arrow_forward</i>
+                            </li>
+                            <li><a class="parent-item" href="">Department</a>&nbsp;<i class="material-icons">arrow_forward</i>
+                            </li>
+                            <li class="active">Add Department</li>
+                        </ol>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-12">
+                        <div class="card-box">
+                            <div class="card-head">
+                                <header>Add Department</header>
+                                <button id="panel-button"
+                                    class="mdl-button mdl-js-button mdl-button--icon pull-right"
+                                    data-upgraded=",MaterialButton">
+                                    <i class="material-icons">more_vert</i>
+                                </button>
+                                <ul class="mdl-menu mdl-menu--bottom-right mdl-js-menu mdl-js-ripple-effect"
+                                    data-mdl-for="panel-button">
+                                    <li class="mdl-menu__item"><i class="material-icons">assistant_photo</i>Action
+                                    </li>
+                                    <li class="mdl-menu__item"><i class="material-icons">print</i>Another action
+                                    </li>
+                                </ul>
+                            </div>
+                            <form action="{% url 'edit_department' dept_edit.id %}" method="POST">
+                                {% csrf_token %}
+                                <div class="card-body row">
+                                    <div class="col-lg-6 p-t-20">
+                                        <div
+                                            class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+                                            <input class="mdl-textfield__input" name="department_name" value="{{dept_edit.department_name}}" type="text" id="department_name">
+                                            
+                                            <label class="mdl-textfield__label">Department Name</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 p-t-20">
+                                        <div class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label getmdl-select getmdl-select__fix-height txt-full-width">
+                                            <select name="hod" id="" class="mdl-textfield__input"  value="{{dept_edit.head_of_department}}">
+                                                <option value="" class="mdl-menu__item"> Head Of Department </option>
+                                                {% for teacher in teacherprofile %}
+                                                <option value="{{ teacher.id }}" class="mdl-menu__item">{{ teacher.first_name }} {{ teacher.last_name }}</option>
+                                                {% endfor %}
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 p-t-20">
+                                        <div
+                                            class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+                                            <input class="mdl-textfield__input" name="starting_year" type="text"  value="{{dept_edit.starting_year}}" id="date">
+                                            <label class="mdl-textfield__label">Department Start Date</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 p-t-20">
+                                        <div
+                                            class="mdl-textfield mdl-js-textfield mdl-textfield--floating-label txt-full-width">
+                                            <input class="mdl-textfield__input" name="student_capacity" type="text" value="{{dept_edit.student_capacity}}" pattern="-?[0-9]*(\.[0-9]+)?" id="student_capacity">
+                                            <label class="mdl-textfield__label">Student Capacity</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 p-t-20">
+                                        <div class="mdl-textfield mdl-js-textfield txt-full-width">
+                                        <textarea class="mdl-textfield__input" name="department_details" rows="4" id="department_details">
+                                            {{dept_edit.department_details}}
+                                        </textarea>
+                                            <label class="mdl-textfield__label" for="text7">Department Details</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-12 p-t-20 text-center">
+                                        <button type="submit"
+                                            class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 m-r-20 btn-pink">Update</button>
+                                        <button type="reset"
+                                            class="mdl-button mdl-js-button mdl-button--raised mdl-js-ripple-effect m-b-10 btn-default">Cancel</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- end page content -->
+        {% include 'util/chat_sidebar.html' %}
+    </div>
+    <!-- end page container -->
+</div>
+{% endblock %}
